@@ -18,7 +18,7 @@ Udemy course [Course Title] here: [Course URL]**
 Clone this template to your system using the ASK CLI. Specifically, run the following command:
 
 ```
-ask new --url [GITHUB URL]
+ask new --url https://github.com/appeality/acquiknowledge-alexa-skills-starter-template.git
 ```
 
 ### Add package.json config values
