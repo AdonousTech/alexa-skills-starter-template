@@ -1,0 +1,18 @@
+{
+    "name": "acquiknowledge-hello-alexa-skills",
+    "version": "1.0.0",
+    "config": {
+        "profile": "default"
+      },
+    "scripts": {
+      "build": "tsc",
+      "deploy-skill": "npm run private-deploy-manifest && npm run private-deploy-model && npm run private-deploy-isp && cd ./lambda/custom && npm run update-lambda-code",
+      "private-deploy-manifest": "ask deploy --force --profile %npm_package_config_profile% --target skill",
+      "private-deploy-model": "ask deploy --force --profile %npm_package_config_profile% --target model",
+      "private-deploy-isp": "ask deploy --force --profile %npm_package_config_profile% --target isp"
+    },
+    "author": "acquiknowledge",
+    "license": "ISC",
+    "keywords": ["alexa", "typescript", "ask", "v2"],
+    "description": "Serverless application package for Alexa Skills built with ASK CLI and ASK SDK V2 and TypeScript"
+  }

@@ -1,0 +1,68 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Create infrastructure from Alexa Skill development.",
+    "Resources": {
+        "LambdaExecRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": {
+                        "Effect": "Allow",
+                        "Principal": {
+                            "Service": "lambda.amazonaws.com"
+                        },
+                        "Action": "sts:AssumeRole"
+                    }
+                },
+                "Policies": [{
+                    "PolicyName": "root",
+                    "PolicyDocument": {
+                        "Version": "2012-10-17",
+                        "Statement": [
+                            {
+                                "Effect": "Allow",
+                                "Action": [
+                                    "logs:*"
+                                ],
+                                "Resource": "arn:aws:logs:*:*:*"
+                            }
+                        ]
+                    }
+                }]
+            }
+        },
+        "LambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Code": {
+                    "ZipFile": {
+                        "Fn::Join": [
+                          "\n",
+                          [
+                            "exports.handler = function(event, context) {",
+                            "  console.log('hello world!');",
+                            "};"
+                          ]
+                        ]
+                      }
+                },
+                "Handler": "index.handler",
+                "MemorySize": 128,
+                "Role": {"Fn::GetAtt" : [ "LambdaExecRole", "Arn" ]},
+                "Runtime": "nodejs8.10",
+                "Timeout": 30
+            },
+            "DependsOn": "LambdaExecRole"
+        }
+    },
+    "Outputs": {
+        "LambdaFunctionArn": {
+            "Description": "The execution role applied to the Lambda function(s).",
+            "Value": {"Fn::GetAtt" : [ "LambdaFunction", "Arn" ]}
+        },
+        "LambdaExecutionRole": {
+            "Description": "The execution role applied to the Lambda function(s).",
+            "Value": {"Fn::GetAtt" : [ "LambdaExecRole", "Arn" ]}
+        }
+    }
+}
