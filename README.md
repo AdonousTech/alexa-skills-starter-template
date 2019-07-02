@@ -28,7 +28,7 @@ Once you have the template in the desired directory on your system, you can upda
 ```
 cd ./lambda/custom
 ```
-Next, update the config object in the package.json file at the root of the lambda function directory.
+Next, update the config object in the package.json file at the root of the lambda function directory. The properties with existing values are the defaults. If you change these values, be sure to update the corresponding objects in the file structure.
 ```
   "config": {
     "functionName": "",
@@ -52,7 +52,7 @@ Let's walk through each of these properties:
 | **region** | The AWS region      | 
 | **stackName** | The name of the resulting CloudFormation stack. Keep this name short, as resources will be created and prepended with this name. If the name is too long, you could run in to issues.     | 
 | **template** | The path to the template. This passes in the contents of the CloudformationTemplate as text. For more info see https://aws.amazon.com/blogs/developer/best-practices-for-local-file-parameters/       | 
-| **profile** | The AWS CLI profile you intend to use when making calls to variou APIS      | 
+| **profile** | The AWS CLI profile you intend to use when making calls to various APIS      | 
 
 ### Create the Stack
 
@@ -66,7 +66,7 @@ Once stack creation is complete, you can find your new lambda function and copy 
 
 ### Update skills.json manifest file
 
-Next, open the **skills.json** file at the root of the project. Add your function name to the **apis.custom.endpoint.uri** property as specified below:
+Next, open the **skills.json** file at the **root** of the project. Add your function name to the **apis.custom.endpoint.uri** property as specified below:
 ```
     "apis": {
       "custom": {
@@ -78,7 +78,7 @@ Next, open the **skills.json** file at the root of the project. Add your functio
     },
 ```
 
-This steps ensures that ASK CLI will deploy the lambda code to the function you set up earlier via CloudFormation. 
+This steps ensures that ASK CLI will deploy the lambda code to the function you set up earlier via CloudFormation. Using this template, ASK CLI will only attempt to deploy your function on the initial skill creation (See *Deploy Skill for the 1st time*). 
 
 ### Deploy the skill for the 1st time
 Make sure you are in the root of the project. This will instruct the ASK CLI to create a new Alexa Skill in your developer account, and to associate and deploy the lambda function to your AWS back end.
@@ -88,7 +88,7 @@ ask deploy target --all
 ```
 
 ### Update the existing Alexa Skill Kit Trigger for the Lambda Function
-When you created the Cloudformation stack earlier, it included a AWS Lambda Permission that allows the Alexa Skill Skit to invoke the lambda function. However, this trigger did not include an EventSourceToken which is used as an additional layer of security on the trigger. In the context of an Alexa Skill, the EventSourceToken is the actual skill id. Associating this value with the trigger ensures that only the Alexa Skill with the specified ID can trigger the specific lambda function.
+When you created the Cloudformation stack earlier, it included an AWS Lambda Permission that allows the Alexa Skill Skit to invoke the lambda function. However, this trigger did not include an EventSourceToken which is used as an additional layer of security on the trigger. In the context of an Alexa Skill, the EventSourceToken is the actual skill id. Associating this value with the trigger ensures that only the Alexa Skill with the specified ID can trigger the specific lambda function.
 
 * Make a note of the skill id from **.ask/config**
 ```
@@ -117,7 +117,7 @@ cd ./lambda/custom
             }
         }
 ```
-* Update the stack
+* Update the stack. Note, this change requires Cloudformation to **replace** the existing Alexa Skills Trigger. See https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement
 ```
 npm run update-skills-stack
 ```
