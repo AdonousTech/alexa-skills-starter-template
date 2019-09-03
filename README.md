@@ -43,16 +43,14 @@ Next, update the config object in the package.json file at the root of the lambd
 ```
 
 Let's walk through each of these properties:
-| Property        | Description         
-| ------------- |:-------------:| 
-| **functionName**     | The name of the lambda function from your AWS account. You will not have this value until you deploy the Cloudformation stack for the first time | 
-| **functionFileName**      | The name of the file that makes up the actual lambda function. This file is recreated each time the skill is deployed.      | 
-| **functionFileLocation**| The path to the packaged lambda function.       | 
-| **functionFileLocationNormalized** |   Allows us to pass in the contents of the lambda package zip file to the AWS CLI as a binary object. For more info see https://aws.amazon.com/blogs/developer/best-practices-for-local-file-parameters/    | 
-| **region** | The AWS region      | 
-| **stackName** | The name of the resulting CloudFormation stack. Keep this name short, as resources will be created and prepended with this name. If the name is too long, you could run in to issues.     | 
-| **template** | The path to the template. This passes in the contents of the CloudformationTemplate as text. For more info see https://aws.amazon.com/blogs/developer/best-practices-for-local-file-parameters/       | 
-| **profile** | The AWS CLI profile you intend to use when making calls to various APIS      | 
+- **functionName**     The name of the lambda function from your AWS account. You will not have this value until you deploy the Cloudformation stack for the first time
+- **functionFileName** The name of the file that makes up the actual lambda function. This file is recreated each time the skill is deployed. 
+- **functionFileLocation** The path to the packaged lambda function.     
+- **functionFileLocationNormalized** Allows us to pass in the contents of the lambda package zip file to the AWS CLI as a binary object. For more info see https://aws.amazon.com/blogs/developer/best-practices-for-local-file-parameters/  
+- **region** The AWS region
+- **stackName** The name of the resulting CloudFormation stack. Keep this name short, as resources will be created and prepended with this name. If the name is too long, you could run in to issues.  
+- **template** The path to the template. This passes in the contents of the CloudformationTemplate as text. For more info see https://aws.amazon.com/blogs/developer/best-practices-for-local-file-parameters/  
+- **profile** The AWS CLI profile you intend to use when making calls to various APIS 
 
 ### Create the Stack
 
@@ -64,9 +62,9 @@ npm run create-skills-stack
 
 Once stack creation is complete, you can find your new lambda function and copy the name of the function. Paste the name of the function in your config file at the **functionName** parameter.
 
-### Update skills.json manifest file
+### Update skill.json manifest file
 
-Next, open the **skills.json** file at the **root** of the project. Add your function name to the **apis.custom.endpoint.uri** property as specified below:
+Next, open the **skill.json** file at the **root** of the project. Add your function name to the **apis.custom.endpoint.uri** property as specified below:
 ```
     "apis": {
       "custom": {
@@ -77,6 +75,23 @@ Next, open the **skills.json** file at the **root** of the project. Add your fun
       }
     },
 ```
+
+Add the name of your skill, as well as the category. You can update the testing instructions 
+and other values at a later time
+```
+    "name": "just-a-test",
+    "description": "Sample Full Description"
+```
+
+```
+    "isAvailableWorldwide": true,
+    "testingInstructions": "Sample Testing Instructions.",
+    "category": "[ADD CATEGORY FROM https://developer.amazon.com/docs/smapi/skill-manifest.html#category-enum]",
+    "distributionCountries": []
+```
+
+While in the **skill.json** file, go ahead and update the category property to provide a value from
+here https://developer.amazon.com/docs/smapi/skill-manifest.html#category-enum
 
 This steps ensures that ASK CLI will deploy the lambda code to the function you set up earlier via CloudFormation. Using this template, ASK CLI will only attempt to deploy your function on the initial skill creation (See *Deploy Skill for the 1st time*). 
 
