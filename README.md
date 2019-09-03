@@ -99,7 +99,7 @@ This steps ensures that ASK CLI will deploy the lambda code to the function you 
 Make sure you are in the root of the project. This will instruct the ASK CLI to create a new Alexa Skill in your developer account, and to associate and deploy the lambda function to your AWS back end.
 
 ```
-ask deploy target --all
+ask deploy --target all
 ```
 
 ### Update the existing Alexa Skill Kit Trigger for the Lambda Function
