@@ -53,6 +53,16 @@
                 "Timeout": 30
             },
             "DependsOn": "LambdaExecRole"
+        },
+        "AlexaSkillFunctionPermissions": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "FunctionName": {
+                    "Ref": "LambdaFunction"
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "alexa-appkit.amazon.com"
+            }
         }
     },
     "Outputs": {
