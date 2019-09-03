@@ -11,6 +11,7 @@ export class LaunchRequestHandler implements RequestHandler {
         const responseBuilder = handlerInput.responseBuilder;
 
         return responseBuilder.speak('welcome from typescript')
+        .withShouldEndSession(false)
         .getResponse();
     }   
 }
