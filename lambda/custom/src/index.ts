@@ -1,12 +1,12 @@
 import { SkillBuilders } from "ask-sdk";
 import { LambdaHandler } from "ask-sdk-core/dist/skill/factory/BaseSkillFactory";
 
-import { LaunchRequestHandler } from "./handlers/LaunchRequestHandler";
-import { AmazonCancelIntentHandler } from "./handlers/AMAZON_CancelIntent_Handler";
-import { AmazonStopIntentHandler } from "./handlers/AMAZON_StopIntent_Handler";
-import { HelloHandler } from "./handlers/HelloHandler";
-import { SessionEndedHandler } from "./handlers/SessionEndedHandler";
-import { CustomErrorHandler } from "./handlers/CustomErrorHandler";
+import { LaunchRequestHandler } from "./lib/LaunchRequestHandler";
+import { AmazonCancelIntentHandler } from "./lib/AMAZON_CancelIntent_Handler";
+import { AmazonStopIntentHandler } from "./lib/AMAZON_StopIntent_Handler";
+import { HelloHandler } from "./lib/HelloHandler";
+import { SessionEndedHandler } from "./lib/SessionEndedHandler";
+import { CustomErrorHandler } from "./lib/CustomErrorHandler";
 
 
 function buildLambdaSkill(): LambdaHandler {
