@@ -10,7 +10,7 @@ export class LaunchRequestHandler implements RequestHandler {
     handle(handlerInput: HandlerInput): Response {
         const responseBuilder = handlerInput.responseBuilder;
 
-        return responseBuilder.speak('welcome from typescript')
+        return responseBuilder.speak('ADD LAUNCH MESSAGE')
         .withShouldEndSession(false)
         .getResponse();
     }   

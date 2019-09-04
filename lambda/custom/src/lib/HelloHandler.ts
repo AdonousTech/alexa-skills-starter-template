@@ -12,8 +12,8 @@ export class HelloHandler implements RequestHandler {
         const responseBuilder = handlerInput.responseBuilder;
 
         return responseBuilder
-                       .speak('hello to you too')
-                       .reprompt('what was that?')
+                       .speak('SAY SOMETHING')
+                       .reprompt('SAY SOMETHING')
                        .getResponse();
     }   
 }
