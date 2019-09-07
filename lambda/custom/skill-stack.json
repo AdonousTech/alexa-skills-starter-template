@@ -116,7 +116,7 @@
         },
         "DynamoDBTable": {
             "Description": "The DynamoDB table for skill persistence",
-            "Value": {"Fn::GetAtt" : [ "DBTable", "TableName" ]}
+            "Value": {"Fn::GetAtt" : [ "DBTable", "Arn" ]}
         }
     }
 }
