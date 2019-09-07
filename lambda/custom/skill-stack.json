@@ -1,6 +1,16 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Description": "Create infrastructure from Alexa Skill development.",
+    "Parameters": {
+        "TableName": {
+            "Type": "String",
+            "Description": "The database table for our skill."
+        },
+        "HashKey": {
+            "Type": "String",
+            "Description": "The primary key for our database table."
+        }
+    },
     "Resources": {
         "LambdaExecRole": {
             "Type": "AWS::IAM::Role",
@@ -25,11 +35,19 @@
                                     "logs:*"
                                 ],
                                 "Resource": "arn:aws:logs:*:*:*"
+                            },
+                            {
+                                "Effect": "Allow",
+                                "Action": [
+                                    "dynamodb:*"
+                                ],
+                                "Resource": {"Fn::Join" : [ "", [{"Fn::Sub": "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/"}, {"Ref" : "TableName"}] ] }
                             }
                         ]
                     }
                 }]
-            }
+            },
+            "DependsOn": ["DBTable"]
         },
         "LambdaFunction": {
             "Type": "AWS::Lambda::Function",
@@ -63,6 +81,28 @@
                 "Action": "lambda:InvokeFunction",
                 "Principal": "alexa-appkit.amazon.com"
             }
+        },
+        "DBTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+                "TableName": {"Ref":  "TableName"},
+                "BillingMode": "PAY_PER_REQUEST",
+                "SSESpecification": {
+                    "SSEEnabled": true
+                },
+                "KeySchema": [
+                    {
+                        "AttributeName": {"Ref": "HashKey"},
+                        "KeyType": "HASH"
+                    }
+                ],
+                "AttributeDefinitions": [
+                    {
+                        "AttributeName": {"Ref": "HashKey"},
+                        "AttributeType": "S"
+                    }
+                ]
+            }
         }
     },
     "Outputs": {
@@ -73,6 +113,10 @@
         "LambdaExecutionRole": {
             "Description": "The execution role applied to the Lambda function(s).",
             "Value": {"Fn::GetAtt" : [ "LambdaExecRole", "Arn" ]}
+        },
+        "DynamoDBTable": {
+            "Description": "The DynamoDB table for skill persistence",
+            "Value": {"Fn::GetAtt" : [ "DBTable", "TableName" ]}
         }
     }
 }

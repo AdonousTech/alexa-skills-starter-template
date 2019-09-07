@@ -8,9 +8,11 @@ import { HelloHandler } from "./lib/HelloHandler";
 import { SessionEndedHandler } from "./lib/SessionEndedHandler";
 import { CustomErrorHandler } from "./lib/CustomErrorHandler";
 
+const dbTable: string = process.env['dbtable'] || "";
 
 function buildLambdaSkill(): LambdaHandler {
     return SkillBuilders.standard()
+    .withTableName(dbTable)
     .addRequestHandlers(
         new AmazonCancelIntentHandler,
         new AmazonStopIntentHandler,

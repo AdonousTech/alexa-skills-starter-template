@@ -10,12 +10,14 @@
     "region": "",
     "stackName": "",
     "template": "file://./skill-stack.json",
-    "profile": ""
+    "profile": "",
+    "dbTableName": "",
+    "dbHashKey": "id"
   },
   "scripts": {
     "build": "tsc",
-    "create-skills-stack": "aws cloudformation create-stack --profile %npm_package_config_profile% --stack-name %npm_package_config_stackName% --template-body %npm_package_config_template% --capabilities CAPABILITY_IAM",
-    "update-skills-stack": "aws cloudformation update-stack --profile %npm_package_config_profile% --stack-name %npm_package_config_stackName% --template-body %npm_package_config_template% --capabilities CAPABILITY_IAM",
+    "create-skills-stack": "aws cloudformation create-stack --profile %npm_package_config_profile% --stack-name %npm_package_config_stackName% --template-body %npm_package_config_template% --parameters ParameterKey=TableName,ParameterValue=%npm_package_config_dbTableName% ParameterKey=HashKey,ParameterValue=%npm_package_config_dbHashKey% --capabilities CAPABILITY_IAM",
+    "update-skills-stack": "aws cloudformation update-stack --profile %npm_package_config_profile% --stack-name %npm_package_config_stackName% --template-body %npm_package_config_template% --parameters ParameterKey=TableName,ParameterValue=%npm_package_config_dbTableName% ParameterKey=HashKey,ParameterValue=%npm_package_config_dbHashKey% --capabilities CAPABILITY_IAM",
     "delete-skills-stack": "aws cloudformation update-stack --profile %npm_package_config_profile% --stack-name %npm_package_config_stackName% --template-body %npm_package_config_template% --capabilities CAPABILITY_IAM",
     "update-lambda-code": "npm run build && npm run private-remove-package && npm run private-package-lambda && npm run private-update-lambda-code",
     "private-update-lambda-code": "aws lambda update-function-code --profile %npm_package_config_profile% --region %npm_package_config_region% --function-name %npm_package_config_functionName% --zip-file %npm_package_config_functionFileLocationNormalized%",
