@@ -67,8 +67,13 @@
                 "Handler": "index.handler",
                 "MemorySize": 128,
                 "Role": {"Fn::GetAtt" : [ "LambdaExecRole", "Arn" ]},
-                "Runtime": "nodejs8.10",
-                "Timeout": 30
+                "Runtime": "nodejs10.x",
+                "Timeout": 30,
+                "Environment": {
+                    "Variables": {
+                        "dbtable": {"Ref":  "TableName"}
+                    }
+                }
             },
             "DependsOn": "LambdaExecRole"
         },
@@ -250,24 +255,15 @@
         },
         "OAI": {
             "Description": "OAI for use with Cloudfront",
-            "Value": {"Ref": "OriginAccessIdentity"},
-            "Export": {
-                "Name": "CDNOAI"
-            }
+            "Value": {"Ref": "OriginAccessIdentity"}
         },
         "CloudFrontDistributionId": {
             "Description": "Cloudfront distribution ID",
-            "Value": {"Ref": "CloudFrontDistribution"},
-            "Export": {
-                "Name": "CDNDISTRIBUTIONID"
-            }
+            "Value": {"Ref": "CloudFrontDistribution"}
         },
         "CloudFrontDistributionDomain": {
             "Description": "Cloudfront distribution domain",
-            "Value": {"Fn::GetAtt": ["CloudFrontDistribution", "DomainName"]},
-            "Export": {
-                "Name": "CDNDISTRIBUTIONDOMAIN"
-            }
+            "Value": {"Fn::GetAtt": ["CloudFrontDistribution", "DomainName"]}
         }
     }
 }

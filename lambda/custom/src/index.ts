@@ -7,6 +7,7 @@ import { AmazonStopIntentHandler } from "./lib/AMAZON_StopIntent_Handler";
 import { HelloHandler } from "./lib/HelloHandler";
 import { SessionEndedHandler } from "./lib/SessionEndedHandler";
 import { CustomErrorHandler } from "./lib/CustomErrorHandler";
+import { AmazonFallbackIntentHandler } from "./lib/AMAZON_FallbackIntent_Handler";
 
 const dbTable: string = process.env['dbtable'] || "";
 
@@ -14,11 +15,12 @@ function buildLambdaSkill(): LambdaHandler {
     return SkillBuilders.standard()
     .withTableName(dbTable)
     .addRequestHandlers(
-        new AmazonCancelIntentHandler,
-        new AmazonStopIntentHandler,
+        new AmazonCancelIntentHandler(),
+        new AmazonStopIntentHandler(),
         new HelloHandler(),
         new LaunchRequestHandler(),
-        new SessionEndedHandler()
+        new SessionEndedHandler(),
+        new AmazonFallbackIntentHandler()
     )
     .addErrorHandlers(new CustomErrorHandler())
     .lambda();

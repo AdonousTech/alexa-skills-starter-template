@@ -1,14 +1,19 @@
 {
-    "name": "acquiknowledge-hello-alexa-skills",
+    "name": "adonous-tech-hello-alexa-skills",
     "version": "1.0.0",
     "config": {
-        "profile": "default"
+        "profile": "default",
+        "skillId": ""
       },
     "scripts": {
       "build": "tsc",
-      "deploy-skill": "npm run private-deploy-manifest && npm run private-deploy-model && npm run private-deploy-isp && cd ./lambda/custom && npm run update-lambda-code",
+      "add-isp": "ask add isp",
+      "check-isp-status": "ask status --isp",
+      "deploy-skill": "npm run private-get-skill && npm run private-deploy-manifest && npm run private-deploy-model && npm run private-deploy-isp && cd ./lambda/custom && npm run update-lambda-code",
+      "deploy-skill-no-isp": "npm run private-get-skill && npm run private-deploy-manifest && npm run private-deploy-model && cd ./lambda/custom && npm run update-lambda-code",
       "private-deploy-manifest": "ask deploy --force --profile %npm_package_config_profile% --target skill",
       "private-deploy-model": "ask deploy --force --profile %npm_package_config_profile% --target model",
+      "private-get-skill": "ask api get-skill -s %npm_package_config_skillId% --stage development > skill.json",
       "private-deploy-isp": "ask deploy --force --profile %npm_package_config_profile% --target isp"
     },
     "author": "acquiknowledge",

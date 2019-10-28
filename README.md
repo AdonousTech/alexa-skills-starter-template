@@ -58,6 +58,7 @@ After adding the config values, you are ready to create the Cloudformation Stack
 ```
 npm run create-skills-stack
 ```
+
 ### Update Config Values
 
 Once stack creation is complete, you can find your new lambda function and copy the name of the function. Paste the name of the function in your config file at the **functionName** parameter.
@@ -100,6 +101,19 @@ Make sure you are in the root of the project. This will instruct the ASK CLI to 
 
 ```
 ask deploy --target all
+```
+
+### Update the Config object in the root package.json
+Next, you need to update the config object of the root package.json with the skill id. This is necessary for future skill deployments. It allows you to pull the skill manifest from the developer console before pushing an update. When creating the skill manifest, its a lot easier to add values in the developer console, than to make the updates by hand in the JSON file. On every deployment, the latest manifest is pulled in from the developer console,
+before deploying the skill.
+
+* Make a note of the skill id from **.ask/config**
+Make sure you are in the **root** package.json. Add the skill id to the **skillId** property of the config object.
+```
+    "config": {
+        "profile": "default",
+        "skillId": "amzn1.ask.skill.xxxxxxxxxxxxxxxxxxxxx"
+      },
 ```
 
 ### Update the existing Alexa Skill Kit Trigger for the Lambda Function

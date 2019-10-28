@@ -9,7 +9,6 @@ export class SessionEndedHandler implements RequestHandler {
 
     handle(handlerInput: HandlerInput): Response {
         const responseBuilder = handlerInput.responseBuilder;
-
         return responseBuilder.getResponse();
     }   
 }
