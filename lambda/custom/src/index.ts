@@ -8,6 +8,8 @@ import { HelloHandler } from "./lib/HelloHandler";
 import { SessionEndedHandler } from "./lib/SessionEndedHandler";
 import { CustomErrorHandler } from "./lib/CustomErrorHandler";
 import { AmazonFallbackIntentHandler } from "./lib/AMAZON_FallbackIntent_Handler";
+import { GlobalRequestInterceptor } from './lib/GlobalRequestInterceptor';
+import { GlobalResponseInterceptor } from './lib/GlobalResponseInterceptor';
 
 const dbTable: string = process.env['dbtable'] || "";
 
@@ -23,6 +25,8 @@ function buildLambdaSkill(): LambdaHandler {
         new AmazonFallbackIntentHandler()
     )
     .addErrorHandlers(new CustomErrorHandler())
+    .addRequestInterceptors(new GlobalRequestInterceptor())
+    .addResponseInterceptors(new GlobalResponseInterceptor())
     .lambda();
  }
 

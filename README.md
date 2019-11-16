@@ -1,4 +1,4 @@
-# AcquiKnowledge Alexa Skills Starter Template 
+# Adonous Tech Alexa Skills Starter Template 
 
 This template allows you to quickly create a TypeScript based Alexa skill with independent back end deployment and configuration. That is, you can deploy your serverless application that powers your skill separately from skill-specific resources such as the manifest and interaction model. This template does not use ASK CLI to deploy the lambda function, instead that is handled by custom commands.
 
