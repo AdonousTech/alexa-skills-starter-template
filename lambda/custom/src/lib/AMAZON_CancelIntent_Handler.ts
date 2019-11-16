@@ -1,6 +1,6 @@
 import { HandlerInput, RequestHandler } from "ask-sdk";
 import { Response } from "ask-sdk-model";
-import { MessageHelper } from './services/message-helper-service';
+import { SpeechHelper } from './services/message-helper-service';
 import { RandomMessageTypes } from './speech/enums/random-message-types.enum';
 
 export class AmazonCancelIntentHandler implements RequestHandler {
@@ -12,7 +12,7 @@ export class AmazonCancelIntentHandler implements RequestHandler {
     async handle(handlerInput: HandlerInput): Promise<Response> {
         const responseBuilder = handlerInput.responseBuilder;
 
-        return responseBuilder.speak(MessageHelper.randomMessage(RandomMessageTypes.EXIT))
+        return responseBuilder.speak(SpeechHelper.randomMessage(RandomMessageTypes.EXIT))
                        .withShouldEndSession(true)
                        .getResponse();
     }   

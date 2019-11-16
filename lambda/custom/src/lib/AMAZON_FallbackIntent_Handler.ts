@@ -1,6 +1,6 @@
 import { HandlerInput, RequestHandler } from "ask-sdk";
 import { Response } from "ask-sdk-model";
-import { MessageHelper } from './services/message-helper-service';
+import { SpeechHelper } from './services/message-helper-service';
 import { RandomMessageTypes } from './speech/enums/random-message-types.enum';
 
 export class AmazonFallbackIntentHandler implements RequestHandler {
@@ -13,8 +13,8 @@ export class AmazonFallbackIntentHandler implements RequestHandler {
         let rb = responseBuilder.getResponse();
 
         rb =  responseBuilder
-        .speak(MessageHelper.randomMessage(RandomMessageTypes.GENERIC_ERROR))
-        .reprompt(MessageHelper.randomMessage(RandomMessageTypes.GENERIC_ERROR))
+        .speak(SpeechHelper.randomMessage(RandomMessageTypes.GENERIC_ERROR))
+        .reprompt(SpeechHelper.randomMessage(RandomMessageTypes.GENERIC_ERROR))
         .withShouldEndSession(false)
         .getResponse();
 

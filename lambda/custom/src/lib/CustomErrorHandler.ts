@@ -1,6 +1,6 @@
 import { HandlerInput, ErrorHandler } from "ask-sdk";
 import { Response } from "ask-sdk-model";
-import { MessageHelper } from '../lib/services/message-helper-service';
+import { SpeechHelper } from '../lib/services/message-helper-service';
 import { RandomMessageTypes } from '../lib/speech/enums/random-message-types.enum';
 
 export class CustomErrorHandler implements ErrorHandler {
@@ -15,8 +15,8 @@ export class CustomErrorHandler implements ErrorHandler {
         console.log(`Original Request was: ${JSON.stringify(request, null, 2)}`);
 
         return handlerInput.responseBuilder
-            .speak(MessageHelper.randomMessage(RandomMessageTypes.GENERIC_ERROR))
-            .reprompt(MessageHelper.randomMessage(RandomMessageTypes.GENERIC_ERROR))
+            .speak(SpeechHelper.randomMessage(RandomMessageTypes.GENERIC_ERROR))
+            .reprompt(SpeechHelper.randomMessage(RandomMessageTypes.GENERIC_ERROR))
             .getResponse();
     }   
 }
