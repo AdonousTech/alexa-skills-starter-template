@@ -12,7 +12,7 @@ This template allows you to quickly create a TypeScript based Alexa skill with i
 
 
 **For complete instructions on working with this template, see the
-Udemy course [Course Title] here: [Course URL]**
+Udemy course Extreme Alexa Skills Development: Templatates and Back-End here: https://www.udemy.com/course/extreme-alexa-skills-development-templates-and-back-end/
 
 ## Instructions
 Clone this template to your system using the ASK CLI. Specifically, run the following command:
