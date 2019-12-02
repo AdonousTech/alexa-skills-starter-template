@@ -152,12 +152,16 @@ npm run update-skills-stack
 ```
 Check the progress of the stack update in your AWS account. If the update was successful, move to the next step .
 
-### Compile the Typescript and Deploy the Skill
-At this point, the skill is ready to deploy. When you first created the lambda function, it was created with boilerplate code that simply logs a message to the console. Next, we will use a custom command to deploy our entire skill. This will 1) deploy the interaction model to the ASK developer account; 2) deploy the skill manifest to the ASK developer account; 3) deploy any in-skill products to the ASK developer account; 4) Compile the typescript to JS for the lambda function; 5) create a packaged lambda function that will be accepted by the AWS Lambda service; and 6) deploy the function to AWS. **Make sure you are in the root of the project and run:**
+### Install Dependencies Locally
+While you are still in the root of the /lambda/custom directory. Install the necessary dependencies before building. Run:
 
 ```
 npm install
 ```
+
+### Compile the Typescript and Deploy the Skill
+At this point, the skill is ready to deploy. When you first created the lambda function, it was created with boilerplate code that simply logs a message to the console. Next, we will use a custom command to deploy our entire skill. This will 1) deploy the interaction model to the ASK developer account; 2) deploy the skill manifest to the ASK developer account; 3) deploy any in-skill products to the ASK developer account; 4) Compile the typescript to JS for the lambda function; 5) create a packaged lambda function that will be accepted by the AWS Lambda service; and 6) deploy the function to AWS. **Make sure you are in the root of the project and run:**
+
 
 ```
 npm run deploy-skill
