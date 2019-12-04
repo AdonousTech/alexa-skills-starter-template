@@ -14,6 +14,8 @@ This template allows you to quickly create a TypeScript based Alexa skill with i
 **For complete instructions on working with this template, see the
 Udemy course Extreme Alexa Skills Development: Templatates and Back-End here: https://www.udemy.com/course/extreme-alexa-skills-development-templates-and-back-end/
 
+**For non-Windows users substitute the stated command with command ending in _-unix_**
+
 ## Instructions
 Clone this template to your system using the ASK CLI. Specifically, run the following command:
 
@@ -57,6 +59,11 @@ Let's walk through each of these properties:
 After adding the config values, you are ready to create the Cloudformation Stack. Create the stack by running:
 ```
 npm run create-skills-stack
+```
+
+**Non-Windows**
+```
+npm run create-skills-stack-unix
 ```
 
 ### Update Config Values
@@ -150,6 +157,12 @@ cd ./lambda/custom
 ```
 npm run update-skills-stack
 ```
+
+**Non-Windows**
+```
+npm run update-skills-stack-unix
+```
+
 Check the progress of the stack update in your AWS account. If the update was successful, move to the next step .
 
 ### Install Dependencies Locally
@@ -165,6 +178,11 @@ At this point, the skill is ready to deploy. When you first created the lambda f
 
 ```
 npm run deploy-skill
+```
+
+**Non-Windows**
+```
+npm run deploy-skill-unix
 ```
 
 Going forward, it is no longer necessary to use ``ask deploy`` command explcitly, to deploy the skill. Instead using the above command does the trick. 
