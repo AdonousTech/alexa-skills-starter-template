@@ -78,7 +78,7 @@ Next, open the **skill.json** file at the **root** of the project. Add your func
       "custom": {
         "endpoint": {
           "sourceDir": "lambda/custom",
-          "uri": "[ADD FUNCTION NAME HERE AS STRING]"
+          "uri": "[ADD FUNCTION ARN HERE AS STRING]"
         }
       }
     },
